@@ -512,6 +512,7 @@ pd.reset_option("max_colwidth") #to reset
 ```python
 preprocessed_reviews.to_csv('data/preprocessed_reviews.csv', index=False )
 ```
+## EDA
 ## Different Models Comparison
 
 
