@@ -6,7 +6,7 @@ For preprocessing of Data refer notebook : [Data_preprocessing.ipynb](https://gi
 For Comparing Different Models refer notebook: [Comparing_different_models_for_sentiment_analysis.ipynb](https://github.com/biswajit2sen/Comparing_different_models_for_sentiment_analysis/blob/main/Comparing_different_models_for_sentiment_analysis..ipynb)
 
 ## Data Collection
-we get our data from : https://www.kaggle.com/snap/amazon-fine-food-reviews <br />
+We get our data from : https://www.kaggle.com/snap/amazon-fine-food-reviews <br />
 This dataset consists of reviews of fine foods from amazon. The data span a period of more than 10 years, including all ~500,000 reviews up to October 2012. Reviews include product and user information, ratings, and a plain text review. <br />
 
 ## Data Preprocessing 
@@ -514,7 +514,7 @@ pd.reset_option("max_colwidth") #to reset
 ```python
 preprocessed_reviews.to_csv('data/preprocessed_reviews.csv', index=False )
 ```
-## EDA
+
 ## Different Models Comparison
 
 ```python
@@ -869,7 +869,20 @@ bert_model_history = bert_model.fit(x = train_data['Text'].to_numpy(), y = train
 
 
 ## Conclusion
+From our Experiment we can see that it is **better to train a Bert model on our own data** if we need a Model that can give us good Accuracy, the only constraint is that we should have a good amount of Data and it is taking more time then other models here. <br/>
 
-## Technology used
+| 			    							 | Train Accuracy Score | Training Time/ Epoch | Test Accuracy Score|
+| ------------------------------------------ | -------------------- | ---------------------|--------------------|
+| MLP Model - Bert Large as Embedding layer  |   	   77%			|        251S		   |		78%			|
+| MLP model - Bert Small as Embedding layer  |   	   80%			|        37S		   |		80%			|
+|Bert Large Trainable model   				 |	  	   98%			|		 609S		   |		94%			|
+
+
+
+
 
 ## Credits
+This project wouldn't have been possible without the help of : <br />
+1. [Bert large Model](https://tfhub.dev/tensorflow/bert_en_uncased_L-24_H-1024_A-16/4) and <br />
+2. [Keras Bert using Tf Hub](https://www.kaggle.com/xhlulu/disaster-nlp-keras-bert-using-tfhub)
+
