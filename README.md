@@ -518,61 +518,6 @@ preprocessed_reviews.to_csv('data/preprocessed_reviews.csv', index=False )
 ## Different Models Comparison
 
 ```python
-#Installing Dependencies
-!pip install tensorflow_text
-```
-
-    Collecting tensorflow_text
-    [?25l  Downloading https://files.pythonhosted.org/packages/c0/ed/bbb51e9eccca0c2bfdf9df66e54cdff563b6f32daed9255da9b9a541368f/tensorflow_text-2.5.0-cp37-cp37m-manylinux1_x86_64.whl (4.3MB)
-    [K     |████████████████████████████████| 4.3MB 8.3MB/s 
-    [?25hRequirement already satisfied: tensorflow-hub>=0.8.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow_text) (0.12.0)
-    Requirement already satisfied: tensorflow<2.6,>=2.5.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow_text) (2.5.0)
-    Requirement already satisfied: protobuf>=3.8.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow-hub>=0.8.0->tensorflow_text) (3.12.4)
-    Requirement already satisfied: numpy>=1.12.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow-hub>=0.8.0->tensorflow_text) (1.19.5)
-    Requirement already satisfied: tensorboard~=2.5 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (2.5.0)
-    Requirement already satisfied: keras-preprocessing~=1.1.2 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (1.1.2)
-    Requirement already satisfied: termcolor~=1.1.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (1.1.0)
-    Requirement already satisfied: typing-extensions~=3.7.4 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (3.7.4.3)
-    Requirement already satisfied: astunparse~=1.6.3 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (1.6.3)
-    Requirement already satisfied: tensorflow-estimator<2.6.0,>=2.5.0rc0 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (2.5.0)
-    Requirement already satisfied: flatbuffers~=1.12.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (1.12)
-    Requirement already satisfied: absl-py~=0.10 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (0.12.0)
-    Requirement already satisfied: wrapt~=1.12.1 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (1.12.1)
-    Requirement already satisfied: gast==0.4.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (0.4.0)
-    Requirement already satisfied: h5py~=3.1.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (3.1.0)
-    Requirement already satisfied: six~=1.15.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (1.15.0)
-    Requirement already satisfied: google-pasta~=0.2 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (0.2.0)
-    Requirement already satisfied: opt-einsum~=3.3.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (3.3.0)
-    Requirement already satisfied: wheel~=0.35 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (0.36.2)
-    Requirement already satisfied: grpcio~=1.34.0 in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (1.34.1)
-    Requirement already satisfied: keras-nightly~=2.5.0.dev in /usr/local/lib/python3.7/dist-packages (from tensorflow<2.6,>=2.5.0->tensorflow_text) (2.5.0.dev2021032900)
-    Requirement already satisfied: setuptools in /usr/local/lib/python3.7/dist-packages (from protobuf>=3.8.0->tensorflow-hub>=0.8.0->tensorflow_text) (56.1.0)
-    Requirement already satisfied: werkzeug>=0.11.15 in /usr/local/lib/python3.7/dist-packages (from tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (1.0.1)
-    Requirement already satisfied: requests<3,>=2.21.0 in /usr/local/lib/python3.7/dist-packages (from tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (2.23.0)
-    Requirement already satisfied: tensorboard-data-server<0.7.0,>=0.6.0 in /usr/local/lib/python3.7/dist-packages (from tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (0.6.1)
-    Requirement already satisfied: google-auth<2,>=1.6.3 in /usr/local/lib/python3.7/dist-packages (from tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (1.30.0)
-    Requirement already satisfied: markdown>=2.6.8 in /usr/local/lib/python3.7/dist-packages (from tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (3.3.4)
-    Requirement already satisfied: tensorboard-plugin-wit>=1.6.0 in /usr/local/lib/python3.7/dist-packages (from tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (1.8.0)
-    Requirement already satisfied: google-auth-oauthlib<0.5,>=0.4.1 in /usr/local/lib/python3.7/dist-packages (from tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (0.4.4)
-    Requirement already satisfied: cached-property; python_version < "3.8" in /usr/local/lib/python3.7/dist-packages (from h5py~=3.1.0->tensorflow<2.6,>=2.5.0->tensorflow_text) (1.5.2)
-    Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests<3,>=2.21.0->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (2020.12.5)
-    Requirement already satisfied: idna<3,>=2.5 in /usr/local/lib/python3.7/dist-packages (from requests<3,>=2.21.0->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (2.10)
-    Requirement already satisfied: chardet<4,>=3.0.2 in /usr/local/lib/python3.7/dist-packages (from requests<3,>=2.21.0->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (3.0.4)
-    Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests<3,>=2.21.0->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (1.24.3)
-    Requirement already satisfied: pyasn1-modules>=0.2.1 in /usr/local/lib/python3.7/dist-packages (from google-auth<2,>=1.6.3->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (0.2.8)
-    Requirement already satisfied: cachetools<5.0,>=2.0.0 in /usr/local/lib/python3.7/dist-packages (from google-auth<2,>=1.6.3->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (4.2.2)
-    Requirement already satisfied: rsa<5,>=3.1.4; python_version >= "3.6" in /usr/local/lib/python3.7/dist-packages (from google-auth<2,>=1.6.3->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (4.7.2)
-    Requirement already satisfied: importlib-metadata; python_version < "3.8" in /usr/local/lib/python3.7/dist-packages (from markdown>=2.6.8->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (4.0.1)
-    Requirement already satisfied: requests-oauthlib>=0.7.0 in /usr/local/lib/python3.7/dist-packages (from google-auth-oauthlib<0.5,>=0.4.1->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (1.3.0)
-    Requirement already satisfied: pyasn1<0.5.0,>=0.4.6 in /usr/local/lib/python3.7/dist-packages (from pyasn1-modules>=0.2.1->google-auth<2,>=1.6.3->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (0.4.8)
-    Requirement already satisfied: zipp>=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata; python_version < "3.8"->markdown>=2.6.8->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (3.4.1)
-    Requirement already satisfied: oauthlib>=3.0.0 in /usr/local/lib/python3.7/dist-packages (from requests-oauthlib>=0.7.0->google-auth-oauthlib<0.5,>=0.4.1->tensorboard~=2.5->tensorflow<2.6,>=2.5.0->tensorflow_text) (3.1.0)
-    Installing collected packages: tensorflow-text
-    Successfully installed tensorflow-text-2.5.0
-    
-
-
-```python
 #Importing Liabries
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
