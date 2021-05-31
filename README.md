@@ -1,7 +1,9 @@
 # Comparing Different Models for Sentiment analysis.
 
-In this project I am trying to compare the performance of Trainable Bert Large models vs MLP, CNN, LSTM models for sentiment analysis of reviews given by users for different products in amazon. <br />
+In this project I am trying to compare the performance and training time of different models for Sentiment analysis of reviews given by users for different products in amazon. <br />
+I have used two LSTM models and one BERT large model which we will train on our data going further.<br />
 For preprocessing of Data refer notebook : [Data_preprocessing.ipynb](https://github.com/biswajit2sen/Sentiment_analysis_amazon_fine_food_review/blob/main/Data_preprocessing.ipynb). <br />
+For Comparing Different Models refer notebook: [Comparing_different_models_for_sentiment_analysis.ipynb](https://github.com/biswajit2sen/Comparing_different_models_for_sentiment_analysis/blob/main/Comparing_different_models_for_sentiment_analysis..ipynb)
 
 ## Data Collection
 we get our data from : https://www.kaggle.com/snap/amazon-fine-food-reviews <br />
